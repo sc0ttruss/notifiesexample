@@ -1,0 +1,27 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero  # Download and install this exact version of chef-client
+  #require_chef_omnibus: 12.3.0-1
+    # Use the local chef-client rpm specified in install_chef_rpm.sh:
+  #chef_omnibus_url: file:///mnt/share/install_chef_rpm.sh
+platforms:
+  #- name: ubuntu-14.04
+  - name: centos-6.6
+    driver:
+      #box_url: https://opscode-omnibus-packages.s3.amazonaws.com/el/6/x86_64/chef-12.3.0-1.el6.x86_64.rpm 
+      network:
+        - ["private_network", {ip: "192.168.56.80"}]
+        # Mount local ./chef-kits folder as /mnt/share on the VM
+      synced_folders:
+        - ["./chef-kits", "/mnt/share", "disabled: false"]        
+suites:
+  - name: default
+    run_list:
+      - recipe[notifiesexample::default]
+    attributes:
+      notifiesexample:
+        go_version: 1.4.1
+        go_checksum: '68170d5d48fc317155e69d2b55e4c09878433462ddb77d7900db6590ce2bef49'

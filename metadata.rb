@@ -1,0 +1,7 @@
+name 'notifiesexample'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures notifiesexample'
+long_description 'Installs/Configures notifiesexample'
+version '0.1.0'
